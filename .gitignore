@@ -1,1 +1,3 @@
 day*/*.txt
+.envrc
+day*/*.ipynb
