@@ -5,7 +5,6 @@ Result = namedtuple('Result', 'value, next_pc')
 Instruction = namedtuple('Instruction', 'name, opcode, num_param, writes, func')
 
 DEBUG = False
-
 RUN, PAUSE, STOP = 'RUN', 'PAUSE', 'STOP'
 
 decoder = {i.opcode: i for i in [
