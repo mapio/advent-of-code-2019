@@ -145,7 +145,7 @@ while True:
     if c.STATUS == STOP: break
     color, lr = c.OUTPUT
     if color not in (0, 1) or lr not in (0, 1):
-        print('DIOCANE', c.pc, c.STATUS, c.OUTPUT)
+        print('ERROR', c.pc, c.STATUS, c.OUTPUT)
         break
     r.paint(color, lr)
 
@@ -160,7 +160,8 @@ for (row, col), pix in r.panels.items():
     y = row - rr[0] + 2
     x = col - cr[0] + 2
     if x < 0 or y < 0:
-        print('DIOCANE')
+        print('ERROR')
+        break
     PANELS[y][x] = '#' if pix == WHITE else '.'
 
 print('\n'.join(''.join(row) for row in PANELS))
