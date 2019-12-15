@@ -35,7 +35,11 @@ class Computer:
 
   def __init__(self, PRG, debug = False):
     self.DEBUG = debug
-    self.MEM = PRG[:]
+    if isinstance(PRG, str):
+      with open(PRG) as inf:
+        self.MEM = list(map(int, inf.read().split(',')))
+    else:
+      self.MEM = PRG[:]
     self.STATUS = -1
     self.pc = 0
     self.RB = 0
