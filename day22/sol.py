@@ -1,32 +1,3 @@
-def inverse(a, n):
-    t = 0
-    newt = 1
-    r = n
-    newr = a
-    while newr != 0:
-        quotient = r // newr
-        t, newt = newt, t - quotient * newt
-        r, newr = newr, r - quotient * newr
-    if r > 1:return "a is not invertible"
-    if t < 0: t = t + n
-    return t
-
-def pown(a, n, N):
-    if n == 0: return 1
-    p = pown(a, n // 2, N)
-    if n % 2 == 0:
-        return (p * p) % N
-    else:
-        return (a * p * p) % N
-
-def sumn(a, n, N):
-    if n == 0: return 1
-    if n % 2 == 0:
-        return (sumn(a, n - 1, N) + pown(a, n, N)) % N
-    else:
-        s = sumn(a, n // 2, N)
-        return (s + s * pown(a, 1 + n // 2, N)) % N
-
 class Stack:
     def __init__(self, N):
         self.N = N
@@ -41,7 +12,7 @@ class Stack:
         self.expr = a % self.N, (b + n) % self.N
 
     def deal_with_increment(self, n):
-        i = inverse(n, self.N)
+        i = pow(n, -1, self.N)
         a, b = self.expr
         self.expr = (a * i) % self.N, (b * i) % self.N
 
@@ -71,8 +42,8 @@ T = 101741582076661
 c = Stack(N)
 c.shuffle(ss)
 
-an = pown(c.expr[0], T, N)
-sn = sumn(c.expr[0], T - 1, N)
+an = pow(c.expr[0], T, N)
+sn = ((an - 1 ) * pow(c.expr[0] - 1, -1, N)) % N
 k = 2020
 r = (an * k + sn * c.expr[1]) % N
 
